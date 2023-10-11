@@ -1,0 +1,23 @@
+.hero_nav {
+    min-height: 10rem !important;
+}
+
+/* make adjustment on layout placement based on screen size */
+.keuangan-section-alt {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .keuangan-section {
+        display: none;
+    }
+
+    .keuangan-section-alt {
+        display: contents;
+        background-color: var(--tblr-white) !important;
+    }
+}
+
+.top-under-nav {
+    top: 12px !important;
+}

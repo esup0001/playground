@@ -1,0 +1,102 @@
+{% load static %}
+<!-- Sidebar -->
+<aside class="navbar navbar-vertical navbar-expand-lg">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
+                aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <h1 class="navbar-brand">
+            <a href=".">
+                <img src="{% static 'project_management/img/logo_akrab.svg' %}" width="110" height="32" alt="Akrab"
+                     class="navbar-brand-image">
+            </a>
+        </h1>
+
+        <div class="navbar-nav flex-row d-lg-none">
+            {% if request.user.is_authenticated %}
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+                       aria-label="Open user menu">
+                        {% if request.user.employee_profile %}
+                            <span class="avatar avatar-sm"
+                                  style="background-image: url({{ user.sso_profile_picture }});
+                                          background-position: top;"></span>
+                        {% else %}
+                            <span class="avatar avatar-sm"
+                                  style="background-image: url({% static 'project_management/img/man.png' %})"></span>
+                        {% endif %}
+                        <div class="d-none d-xl-block ps-2">
+                            <div class="nav-link-title">{{ user.name }}</div>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        {% if request.user.is_staff %}
+                            <a href="/manajer/" class="dropdown-item">Administrator</a>
+                        {% else %}
+                            {% if request.user.employee_profile %}
+                                <a href="{% url 'employee:profile' request.user.employee_profile.pk %}"
+                                   class="dropdown-item">
+                                    Profil
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                        <div class="dropdown-divider"></div>
+                        <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="collapse navbar-collapse" id="sidebar-menu">
+            <ul class="navbar-nav pt-lg-3">
+                <li class="nav-item {% if active == 'home' %}bg-primary-lt{% endif %}">
+                    <a class="nav-link" href="">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            {% include 'project_management/svgs/home.html' %}
+                        </span>
+                        <span class="nav-link-title">
+                            Home
+                        </span>
+                    </a>
+                </li>
+
+                <li class="nav-item {% if active == 'agenda' %}bg-primary-lt{% endif %}">
+                    <a class="nav-link" href="{% url 'home' %}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            {% include 'project_management/svgs/calendar.html' %}
+                        </span>
+                        <span class="nav-link-title">
+                            Project
+                        </span>
+                    </a>
+                </li>
+
+                {% if request.user.privilege.admin_serasi %}
+                    <li class="nav-item {% if active == 'topic' %}bg-primary-lt{% endif %}">
+                        <a class="nav-link" href="{% url 'serasi_topic' %}">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                {% include 'project_management/svgs/x-function.html' %}
+                            </span>
+                            <span class="nav-link-title">
+                                ToPIC Kesekretariatan
+                            </span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href=".">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            {% include 'project_management/svgs/exit.html' %}
+                        </span>
+                        <span class="nav-link-title">
+                            Logout
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>

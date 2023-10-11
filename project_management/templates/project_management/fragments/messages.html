@@ -1,0 +1,48 @@
+{% if messages %}
+    {% load static %}
+    <div aria-live="polite" aria-atomic="true" class="position-relative" style="z-index: 11;">
+        <div class="toast-container position-absolute top-0 end-0 p-3">
+            {% for message in messages %}
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-toggle="toast"
+                     data-autohide="true" data-delay="5000">
+                    {% if message.tags == 'error' %}
+                        <div class="toast-header bg-red-lt">
+                            <span class="avatar avatar-xs me-2"
+                                  style="background-image: url({% static 'app_akrab/akrab.png' %})"></span>
+                            <strong class="me-auto">Akrab</strong>
+                            <small>Now</small>
+                            <button type="button" class="ms-2 btn-close" data-bs-dismiss="toast"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            {{ message }}
+                        </div>
+                    {% else %}
+                        <div class="toast-header bg-blue-lt">
+                            <span class="avatar avatar-xs me-2"
+                                  style="background-image: url({% static 'app_akrab/akrab.png' %})"></span>
+                            <strong class="me-auto">Akrab</strong>
+                            <small>Now</small>
+                            <button type="button" class="ms-2 btn-close" data-bs-dismiss="toast"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        let nodeList = document.querySelectorAll('.toast');
+
+        nodeList.forEach((node) => {
+            // Set a 4-second timeout for each alert node
+            setTimeout(() => {
+                node.style.display = 'none';
+            }, 4000);
+        });
+    </script>
+{% endif %}

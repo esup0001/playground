@@ -1,0 +1,49 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'project_management/akrab.png' %}">
+    <!-- CSS files -->
+    <link href="{% static 'project_management/tabler/css/tabler.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'project_management/tabler/css/tabler-vendors.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'project_management/tabler/css/demo.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'project_management/tabler/css/custom-akrab.css' %}" rel="stylesheet"/>
+    <link href="{% static 'project_management/dist/tabler-icon/tabler-icons.min.css' %}" rel="stylesheet">
+    {#    JS     #}
+    <script src="{% static 'project_management/tabler/js/demo-theme.min.js' %}"></script>
+    <script defer src="{% static 'project_management/scripts/akrab.bundle.js' %}"></script>
+    <!-- Chart js -->
+    {% block additional_package %}{% endblock %}
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+        }
+
+        body {
+            font-feature-settings: "cv03", "cv04", "cv11";
+        }
+    </style>
+</head>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' style="background-color: white;">
+<div class="wrapper position-relative" style="background-color: white;">
+
+    {% include 'project_management/fragments/messages.html' %}
+
+    {% block content %}
+    {% endblock %}
+
+
+</div>
+
+<script src="{% static 'project_management/tabler/js/tabler.min.js' %}" defer></script>
+<script src="{% static 'project_management/tabler/js/demo.min.js' %}" defer></script>
+</body>
+</html>

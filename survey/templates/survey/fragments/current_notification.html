@@ -1,0 +1,9 @@
+<span class="badge text-bg-secondary"
+      hx-get="{% url 'get-notification' current=notification %}"
+      hx-trigger="every 5s"
+      hx-swap="outerHTML"
+      hx-target="#notification"
+      id="notification"
+>
+    {{ notification }}
+</span>
